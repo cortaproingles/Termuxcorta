@@ -17,14 +17,14 @@ jobs:
         with:
           node-version: 18
 
-      - name: Clean and Install dependencies
+      - name: Install dependencies
         run: |
-          rm -rf node_modules
-          rm -f package-lock.json
-          npm install
+          npm ci --force
 
       - name: Build Web
-        run: npm run build
+        run: |
+          npm rebuild @tailwindcss/oxide
+          npm run build
 
       - name: Setup Java
         uses: actions/setup-java@v3
