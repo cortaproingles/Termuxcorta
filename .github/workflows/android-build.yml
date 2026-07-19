@@ -10,18 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+      - name: Clean and Install dependencies
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm install
 
       - name: Build Web
         run: npm run build
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'templer'
+          java-version: '17'
 
       - name: Sync Capacitor
         run: npx cap sync
