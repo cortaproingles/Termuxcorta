@@ -1,0 +1,34 @@
+# Pastas de dependências
+node_modules/
+
+# Pastas de build e saída (Compilação)
+dist/
+www/
+build/
+out/
+
+# Configurações do Android
+android/
+.gradle/
+.android/
+local.properties
+
+# Cache e logs
+.npm/
+.DS_Store
+*.log
+*.tmp
+
+# Arquivos de sistema e histórico (Privados)
+.bash_history
+.config/
+.ssh/
+
+# Arquivos compactados
+*.zip
+*.tar.gz
+*.rar
+
+# IDEs e Editores
+.vscode/
+.idea/
