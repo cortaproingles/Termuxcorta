@@ -1,0 +1,8 @@
+{
+	"appId": "com.cortaproingles.shadowing",
+	"appName": "ShadowingApp",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	}
+}
