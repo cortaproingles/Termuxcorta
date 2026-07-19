@@ -17,19 +17,18 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Clean and Install dependencies
         run: |
-          npm ci --force
+          rm -f package-lock.json
+          npm install
 
       - name: Build Web
-        run: |
-          npm rebuild @tailwindcss/oxide
-          npm run build
+        run: npm run build
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          distribution: 'templer'
+          distribution: 'temurin'
           java-version: '17'
 
       - name: Sync Capacitor
