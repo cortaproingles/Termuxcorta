@@ -4,6 +4,7 @@
  */
 
 import React, { useEffect, useRef, useState } from "react";
+import { App as CapacitorApp } from "@capacitor/app";
 import { 
   Play, 
   Pause, 
@@ -311,6 +312,34 @@ export default function App() {
   const [newPortuguese, setNewPortuguese] = useState("");
   const [newTimeStart, setNewTimeStart] = useState<string>("0");
   const [newTimeEnd, setNewTimeEnd] = useState<string>("5");
+
+  // Botão de voltar nativo do Android: fecha modal > volta uma tela > só sai do app na front-page
+  useEffect(() => {
+    const listenerPromise = CapacitorApp.addListener("backButton", () => {
+      if (showAddModal) {
+        setShowAddModal(false);
+        return;
+      }
+      if (showHelpModal) {
+        setShowHelpModal(false);
+        return;
+      }
+      if (currentScreen === "training") {
+        setCurrentScreen("library");
+        return;
+      }
+      if (currentScreen === "library") {
+        setCurrentScreen("front-page");
+        return;
+      }
+      // Já está na tela inicial: aí sim sai do app
+      CapacitorApp.exitApp();
+    });
+
+    return () => {
+      listenerPromise.then((listener) => listener.remove());
+    };
+  }, [currentScreen, showAddModal, showHelpModal]);
 
   const playerRef = useRef<any>(null);
   const loopIntervalRef = useRef<any>(null);
